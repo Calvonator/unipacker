@@ -222,7 +222,7 @@ def identifypacker(sample, yar):
     matches = rules.match(sample)
     result = generate_label(matches)
     if result == 'unknown':
-        print(f"The packer used for {sample} is unknown. Using default unpacker")
+        print(f"The packer used for {sample} is unknown. Using default unpacker") #Herer is the magic
         return 'unknown', matches
 
     return result, matches
