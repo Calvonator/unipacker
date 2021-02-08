@@ -16,7 +16,7 @@ from colorama import Fore
 from unicorn.x86_const import UC_X86_REG_ESP, UC_X86_REG_EAX, UC_X86_REG_EBX, UC_X86_REG_ECX, UC_X86_REG_EDX, \
     UC_X86_REG_EIP, UC_X86_REG_EFLAGS, UC_X86_REG_EDI, UC_X86_REG_ESI, UC_X86_REG_EBP
 
-import unipacker
+#import unipacker
 from unipacker.core import UnpackerClient, UnpackerEngine, Sample
 from unipacker.headers import print_dos_header, print_pe_header, print_opt_header, print_all_headers, \
     print_section_table, \
