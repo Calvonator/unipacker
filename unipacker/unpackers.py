@@ -257,6 +257,7 @@ def generate_label(l):
 def get_unpacker(sample, auto_default_unpacker=True):
     yar = f"{os.path.dirname(unipacker.__file__)}/packer_signatures.yar"
     packer, yara_matches = identifypacker(sample.path, yar)
+    packer = "unknown"
     packers = {
         "upx": UPXUnpacker,
         "petite": PEtiteUnpacker,
