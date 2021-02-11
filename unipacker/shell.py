@@ -150,7 +150,7 @@ class Shell(Cmd, UnpackerClient):
 
         while True:
             try:
-                id = int(input("Enter the option IDT E S T: "))
+                id = int(input("Enter the option ID: "))
             except ValueError:
                 print("Error parsing ID")
                 continue

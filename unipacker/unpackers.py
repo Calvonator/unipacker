@@ -222,10 +222,13 @@ def identifypacker(sample, yar):
     matches = rules.match(sample)
     result = generate_label(matches)
     if result == 'unknown':
-        print(f"The packer used for {sample} is unknown. Using default unpacker") #Herer is the magic
+        print(f"The packer used for {sample} is unknown.") #Herer is the magic
         return 'unknown', matches
 
     return result, matches
+
+
+#def 
 
 
 def generate_label(l):
@@ -264,6 +267,23 @@ def get_unpacker(sample, auto_default_unpacker=True):
         "mpress": MPRESSUnpacker,
         "pecompact": PECompactUnpacker,
     }
+
+    #Request user to manually select an unpacker in the event yara detection fails
+    if packer == 'unknown':
+        print("""Please manually select from the following unpackers: 
+                1. 
+                2.
+                3.
+                4.
+                5.
+                6.
+                7.
+                8.
+                9.
+                10.
+        """)
+
+
 
     if "pe32" not in str(yara_matches):
         raise InvalidPEFile("Not a PE32 file!")
