@@ -271,19 +271,26 @@ def get_unpacker(sample, auto_default_unpacker=True):
 
     #Request user to manually select an unpacker in the event yara detection fails
     if packer == 'unknown':
-        print("""Please manually select from the following unpackers: 
-                1. 
-                2.
-                3.
-                4.
-                5.
-                6.
-                7.
-                8.
-                9.
-                10.
-        """)
-
+        packer_list = list(packers.keys())          #Call to convert the keys of the packers dictionary to list so that the name of the packer is subscriptable at line 289
+        while True:
+            try:
+                chosen_packer_index = int(input("""\nPlease manually select from the following unpackers: 
+                        1. 
+                        2.
+                        3.
+                        4.
+                        5.
+                        6.
+                        7.
+                        8.
+                        9.
+                        10.
+                """))
+                packer = packer_list[chosen_packer_index]
+                print(f"\n{packer} packer has been manually chosen")
+                continue
+            except ValueError:
+                print("Error, please enter an index between 1 - 10")
 
 
     if "pe32" not in str(yara_matches):
