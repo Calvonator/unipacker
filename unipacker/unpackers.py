@@ -275,20 +275,18 @@ def get_unpacker(sample, auto_default_unpacker=True):
         while True:
             try:
                 chosen_packer_index = int(input("""\nPlease manually select from the following unpackers: 
-                        1. 
-                        2.
-                        3.
-                        4.
-                        5.
-                        6.
-                        7.
-                        8.
-                        9.
-                        10.
+                        1. UPX
+                        2. PEtite
+                        3. ASPack
+                        4. FSG
+                        5. YZPack
+                        6. MEW
+                        7. MPRESS
+                        8. PECompact
                 """))
                 packer = packer_list[chosen_packer_index]
                 print(f"\n{packer} packer has been manually chosen")
-                continue
+                break
             except ValueError:
                 print("Error, please enter an index between 1 - 10")
 
