@@ -257,7 +257,7 @@ def generate_label(l):
 def get_unpacker(sample, auto_default_unpacker=True):
     yar = f"{os.path.dirname(unipacker.__file__)}/packer_signatures.yar"
     packer, yara_matches = identifypacker(sample.path, yar)
-    packer = "unknown"
+    #packer = "unknown"  #just a test
     packers = {
         "upx": UPXUnpacker,
         "petite": PEtiteUnpacker,
@@ -269,35 +269,47 @@ def get_unpacker(sample, auto_default_unpacker=True):
         "pecompact": PECompactUnpacker,
     }
 
+    #Turn this into own function
+    #no packer recognized -> manually select one
     #Request user to manually select an unpacker in the event yara detection fails
     if packer == 'unknown':
         packer_list = list(packers.keys())          #Call to convert the keys of the packers dictionary to list so that the name of the packer is subscriptable at line 289
+        
+        print("""
+Please manually select from the following unpackers: 
+    1. UPX
+    2. PEtite
+    3. ASPack
+    4. FSG
+    5. YZPack
+    6. MEW
+    7. MPRESS
+    8. PECompact\n
+                """)
+        
         while True:
             try:
-                chosen_packer_index = int(input("""\nPlease manually select from the following unpackers: 
-                        1. UPX
-                        2. PEtite
-                        3. ASPack
-                        4. FSG
-                        5. YZPack
-                        6. MEW
-                        7. MPRESS
-                        8. PECompact
-                """))
-                packer = packer_list[chosen_packer_index]
-                print(f"\n{packer} packer has been manually chosen")
+                chosen_packer_index = int(input("Enter the option ID: "))
+                packer = packer_list[chosen_packer_index]                       #Uses the list of keys (names of each packer) to place the correct key/packer name into the packer variable
+                print(f"\n{packer} packer has been manually chosen\n")
                 break
             except ValueError:
-                print("Error, please enter an index between 1 - 10")
+                print("Error, please enter an index between 1 - 10\n")
 
 
     if "pe32" not in str(yara_matches):
         raise InvalidPEFile("Not a PE32 file!")
 
-    if packer not in packers:
+    if packer not in packers:               #Second part of use case is probably here
         if auto_default_unpacker:
             return AutomaticDefaultUnpacker(sample), yara_matches
         else:
             return DefaultUnpacker(sample), yara_matches
     else:
         return packers[packer](sample), yara_matches
+
+
+
+
+#def select_unpacker():
+    
