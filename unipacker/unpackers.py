@@ -223,7 +223,8 @@ def identifypacker(sample, yar):
     result = generate_label(matches)
     if result == 'unknown':
         print(f"The packer used for {sample} is unknown.") #Herer is the magic
-        return 'unknown', matches
+        packer = select_unpacker()
+        #return packer, matches
 
     return result, matches
 
@@ -272,8 +273,8 @@ def get_unpacker(sample, auto_default_unpacker=True):
     #Turn this into own function
     #no packer recognized -> manually select one
     #Request user to manually select an unpacker in the event yara detection fails
-    if packer == 'unknown':
-        packer = select_unpacker()
+    #if packer == 'unknown':
+        #packer = select_unpacker()
 
 
     if "pe32" not in str(yara_matches):
